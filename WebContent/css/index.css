@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+.main-menu-grid{
+	
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    width: 300px;
+    height: 300px;
+}
+.main-menu-grid .main-menu-block{
+    width: 146px;
+    height: 146px;
+    text-align: center;
+    background: #33CCFF;
+    margin:2px;
+    line-height:146px;
+    border-radius: 10px;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-variant: small-caps;
+}
