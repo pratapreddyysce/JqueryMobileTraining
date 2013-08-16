@@ -50,3 +50,13 @@ to {
 opacity:0.1;
 }
 }
+.imagebox{
+	
+}
+.imagebox img.thumbnail{
+	width:200px;
+}
+.fieldset label{
+	font-weight: bold;
+	width: 200px; 	
+}
