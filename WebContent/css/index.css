@@ -9,17 +9,44 @@
     margin-left: -150px;
     width: 300px;
     height: 300px;
+    z-index : 1;
 }
 .main-menu-grid .main-menu-block{
     width: 146px;
     height: 146px;
+    line-height:146px;
     text-align: center;
     background: #33CCFF;
     margin:2px;
-    line-height:146px;
     border-radius: 10px;
+    z-index:-1;
+    vertical-align: middle;
+    
+}
+.main-menu-grid .main-menu-block div{
+	display:block;
     color: #FFF;
-    font-weight: bold;
     text-transform: uppercase;
-    font-variant: small-caps;
+    font-size:20px;
+    width: 145px;
+    height: 100%;
+    white-space:normal;
+    
+}
+.main-menu-grid .main-menu-click {
+-webkit-animation-name: cssAnimation;
+-webkit-animation-duration:400ms;
+-webkit-animation-iteration-count: 1;
+-webkit-animation-timing-function: ease;
+-webkit-animation-fill-mode: forwards;
+}
+@-webkit-keyframes cssAnimation {
+from {
+-webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px);
+
+}
+to {
+-webkit-transform: rotate(0deg) scale(10) skew(0deg) translate(0px);
+opacity:0.1;
+}
 }
