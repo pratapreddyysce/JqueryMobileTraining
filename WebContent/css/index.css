@@ -51,7 +51,8 @@ opacity:0.1;
 }
 }
 .imagebox{
-	
+	height:200px;
+	overflow: hidden;
 }
 .imagebox img.thumbnail{
 	width:200px;

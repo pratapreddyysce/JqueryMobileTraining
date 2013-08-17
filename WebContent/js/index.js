@@ -69,6 +69,15 @@
 				$("#prop-list").listview("refresh");
 			}});
 		});
+		
+		$(document).on("pageshow","#prop-detail-page", function(event,data){
+			$("#gear_name").text(prop_select);
+			callSport("stock/prop",{params:{"prop":encodeURI(prop_select)}, success:function(data){
+				$("#prop_image_thumbnail").html($("<img>").addClass("thumbnail").attr("src",server_url+"img/prop/"+encodeURI(data.name)));
+				$("#prop_detail_name").text(data.name);
+				$("#prop_detail_qty").text(data.qty);
+			}});
+		});
 	});
 	
 	
