@@ -4,18 +4,10 @@
 	var sport_selected = "";
 	var gear_selected = "";
 	var prop_select = "";
-	callSport = function(path,option){
-		 $.ajax({
-             url: server_url+path,
-             dataType: 'jsonp',
-             data:option.params,
-             success: (option.success?option.success:null),
-             error: (option.error?option.success:null)
-         });
-	};
 	
 	
 	$(document).ready(function(){
+		authenticate();
 		$("div.main-menu-block").bind("tap",function(event){
 			$(this).addClass("main-menu-click");
 			setTimeout(function(){$("div.main-menu-block").removeClass("main-menu-click");},310);
@@ -80,6 +72,25 @@
 		});
 	});
 	
+
+	callSport = function(path,option){
+		 $.ajax({
+             url: server_url+path,
+             dataType: 'jsonp',
+             data:option.params,
+             success: (option.success?option.success:null),
+             error: (option.error?option.error:null)
+         });
+	};
 	
+	authenticate = function(){
+		callSport("auth/check",{success:loadMenu,error:loadLogin});
+	};
 	
+	loadMenu = function(){
+		$.mobile.changePage("view/menu.html",true,{transition:"pop"});
+	};
+	loadLogin = function(){
+		$.mobile.changePage("view/login.html",true,{transition:"slidedown"});
+	};
 })(jQuery);
