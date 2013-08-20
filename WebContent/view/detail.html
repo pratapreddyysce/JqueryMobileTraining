@@ -2,17 +2,22 @@
 <div data-role="page" id="prop-detail-page" data-add-back-btn="true">
 	<div data-role="header">
 		<h1 id="prop-detail_headname"></h1>
-		<a href="javascript:void(0)" onclick="logout()"  data-role="button" data-icon="alert" class="ui-btn-right" data-iconpos="right" data-theme="e">Log out</a>
+		<a href="javascript:void(0)" onclick="logout()" data-role="button" data-icon="alert" class="ui-btn-right" data-iconpos="right" data-theme="e">Log out</a>
 	</div>
 	<div data-role="content">
-		<div data-role="fieldcontain" id="prop_image_thumbnail" class="imagebox">
-			
-		</div>
+		<div data-role="fieldcontain" id="prop_image_thumbnail" class="imagebox" align="center"></div>
 		<div data-role="fieldcontain" class="fieldset">
 			<label>ชื่อ :</label> <span id="prop_detail_name"></span>
 		</div>
 		<div data-role="fieldcontain" class="fieldset">
-			<label>จำนวนที่เหลือ :</label> <span id="prop_detail_qty"></span>
+			<label>จำนวนทั้งหมด :</label> <span id="prop_detail_qty"></span>
 		</div>
+		<div data-role="fieldcontain" class="fieldset">
+			<label for="bookingDate">วันที่ต้องการยืม :</label> <input name="bookingDate" id="bookingDate" pattern="dd-mm-yyyy" data-clear-btn="true" type="date" />
+		</div>
+		<div data-role="fieldcontain" class="fieldset">
+			<label for="bookQty">จำนวน :</label> <input name="bookQty" id="bookQty" data-clear-btn="true" type="number" />
+		</div>
+		<div  align="center"><a href="javascript:void(0);" id="confirm-book" data-role="button" data-icon="gear" data-inline="true">ทำรายการ</a></div>
 	</div>
 </div>

@@ -4,7 +4,8 @@
 	var sport_selected = "";
 	var gear_selected = "";
 	var prop_select = "";
-	
+	var prop = null;
+	var user = null;
 	
 	$(document).ready(function(){
 		checkRemember();
@@ -24,14 +25,31 @@
 			authentication(user,pass,remm);
 		});
 		$(document).on("tap","#btn_register", function(event,data){
-				$.mobile.changePage("regis.html",true,{transition:"slide"});
+			$.mobile.changePage("regis.html",true,{transition:"slide"});
 		});
-		
+		$(document).on("tap","#confirm-book", function(event,data){
+			var bookDate = $("#bookingDate").val();
+			var bookQty = $("#bookQty").val();
+			bookItem(bookDate,bookQty);
+		});
 		$(document).on("tap","#bnt_regis_p", function(event,data){
 			$(this).addClass("main-menu-click");
 			var user = $("input#regis_user").val();
 			var pass = $("input#regis_pass").val();
 			registation(user,pass);
+		});
+		$(document).on("change","#bookingDate", function(event,data){
+			var bookDate = $(this).val();
+			prop.books;
+			var curQty = prop.qty;
+			if(prop.books){
+				for(var book in prop.books){
+					if(book.date == bookDate){
+						curQty -= book.qty;
+					}
+				}
+			}
+			$("#prop_detail_qty").text(curQty);
 		});
 
 		$(document).on("pageshow","#sport-page", function(event,data){
@@ -83,6 +101,7 @@
 				$("#prop_image_thumbnail").html($("<img>").addClass("thumbnail").attr("src",server_url+"img/prop/"+encodeURI(data.name)));
 				$("#prop_detail_name").text(data.name);
 				$("#prop_detail_qty").text(data.qty);
+				prop = data;
 			}});
 		});
 	});
@@ -103,8 +122,10 @@
 	checkSuccess = function(data){
 		if(data.status == "ok"){
 				$.mobile.changePage("view/menu.html",true,{transition:"pop"});
+				user = data.user;
 		}else{
 				$.mobile.changePage("view/login.html",true,{transition:"slideDown"});
+				user = null;
 		}
 	};
 	//login
@@ -114,6 +135,7 @@
 	loginComplete = function(data){
 		if(data.status == "ok"){
 			$.mobile.changePage("menu.html",true,{transition:"pop"});
+			user = data.user;
 		}else{
 			notification(data.message);
 		}
@@ -141,6 +163,19 @@
 			notification(data.message);
 		}
 	};
+	//booking
+	bookItem = function(bookDate,bookQty){
+		callSport("book/book",{params:{"prop":prop.name,date:bookDate,qty:bookQty},success:bookComplete});
+	};
+	bookComplete = function(data){
+		if(data.status == "ok"){
+			$.mobile.changePage("login.html",true,{transition:"slide"});
+			notification(data.message);
+		}else{
+			notification(data.message);
+		}
+	};
+	
 	notification = function(message){
 		$("#notification-message").text(message);
 		$("#notification-popup").popup();
