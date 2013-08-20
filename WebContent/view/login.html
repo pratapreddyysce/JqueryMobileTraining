@@ -8,16 +8,19 @@
 		<input name="login_user" id="login_user" data-clear-btn="true" data-mini="true" value="" maxlength="10" type="text"/>
 		<label for="login_pass">Password :</label>
 		<input name="login_pass" id="login_pass" data-clear-btn="true" data-mini="true" value="" maxlength="16" type="password"/>
-	<div data-role="fieldcontain">
-		<label for="remember-login">เข้าสู่ระบบอัตโนม้ติ</label>
+	<div data-role="fieldcontain" style="vertical-align: middle;">
+		<label for="remember-login" style="white-space: nowrap;width: 130px;">เข้าสู่ระบบอัตโนม้ติ</label>
 		<select name="remember-login" id="remember-login" data-role="slider" data-theme="b" data-track-theme="c">
 			<option value="off"></option>
 			<option value="on">จดจำ</option>
 		</select>
 	</div>
 		<div data-role="controlgroup" id="buttons-1" align="center" data-type="horizontal" style="margin-top:20px;">
-			<a href="#" data-role="button" data-icon="check" data-theme="b">Login</a>
-			<a href="#" data-role="button" data-icon="custom" data-theme="b">Register</a>
+			<a href="#" id="btn_login" data-role="button" data-icon="check" data-theme="b">Login</a>
+			<a href="#" id="btn_register" data-role="button" data-icon="custom" data-theme="b">Register</a>
 		</div>
 	</div>
+<div data-role="popup" data-transition="pop" data-theme="e" id="notification-popup">
+	<p id="notification-message"><p>
+</div>
 </div>

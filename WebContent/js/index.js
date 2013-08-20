@@ -7,15 +7,31 @@
 	
 	
 	$(document).ready(function(){
-		authenticate();
-		$("div.main-menu-block").bind("tap",function(event){
+		checkRemember();
+		
+		$(document).on("tap","#menu_store", function(event,data){
+				$.mobile.changePage("stock.html",true,{transition:"slide"});
+		});
+		$(document).on("tap","div.main-menu-block", function(event,data){
 			$(this).addClass("main-menu-click");
 			setTimeout(function(){$("div.main-menu-block").removeClass("main-menu-click");},310);
-			
+		});
+		$(document).on("tap","#btn_login", function(event,data){
+			$(this).addClass("main-menu-click");
+			var user = $("input#login_user").val();
+			var pass = $("input#login_pass").val();
+			var remm = $("select#remember-login").val();
+			authentication(user,pass,remm);
+		});
+		$(document).on("tap","#btn_register", function(event,data){
+				$.mobile.changePage("regis.html",true,{transition:"slide"});
 		});
 		
-		$("#menu_store").bind("tap",function(event){
-			$.mobile.changePage("view/stock.html",true,{transition:"pop"});
+		$(document).on("tap","#bnt_regis_p", function(event,data){
+			$(this).addClass("main-menu-click");
+			var user = $("input#regis_user").val();
+			var pass = $("input#regis_pass").val();
+			registation(user,pass);
 		});
 
 		$(document).on("pageshow","#sport-page", function(event,data){
@@ -31,7 +47,6 @@
 				$("#sport-list").listview("refresh");
 			}});
 		});
-		
 		$(document).on("pageshow","#gear-page", function(event,data){
 			$("#sport_name").text(sport_selected);
 			callSport("stock/gear",{params:{"sport":encodeURI(sport_selected)}, success:function(data){
@@ -78,19 +93,58 @@
              url: server_url+path,
              dataType: 'jsonp',
              data:option.params,
-             success: (option.success?option.success:null),
-             error: (option.error?option.error:null)
+             success: (option.success?option.success:null)
          });
 	};
-	
-	authenticate = function(){
-		callSport("auth/check",{success:loadMenu,error:loadLogin});
+	// check remember
+	checkRemember = function(){
+		callSport("auth/check",{success:checkSuccess});
 	};
-	
-	loadMenu = function(){
-		$.mobile.changePage("view/menu.html",true,{transition:"pop"});
+	checkSuccess = function(data){
+		if(data.status == "ok"){
+				$.mobile.changePage("view/menu.html",true,{transition:"pop"});
+		}else{
+				$.mobile.changePage("view/login.html",true,{transition:"slideDown"});
+		}
 	};
-	loadLogin = function(){
-		$.mobile.changePage("view/login.html",true,{transition:"slidedown"});
+	//login
+	authentication = function(user,pass,remm){
+		callSport("auth/login",{params:{username:user,password:pass,remember:(remm=='on')},success:loginComplete});
+	};
+	loginComplete = function(data){
+		if(data.status == "ok"){
+			$.mobile.changePage("menu.html",true,{transition:"pop"});
+		}else{
+			notification(data.message);
+		}
+	};
+	//logout
+	logout = function(){
+		callSport("auth/logout",{success:logoutComplete});
+	};
+	logoutComplete = function(data){
+		if(data.status == "ok"){
+			$.mobile.changePage("login.html",true,{transition:"slideDown"});
+		}else{
+			notification(data.message);
+		}
+	};
+	//register
+	registation = function(user,pass){
+		callSport("auth/regis",{params:{username:user,password:pass},success:regisComplete});
+	};
+	regisComplete = function(data){
+		if(data.status == "ok"){
+			$.mobile.changePage("login.html",true,{transition:"slide"});
+			notification(data.message);
+		}else{
+			notification(data.message);
+		}
+	};
+	notification = function(message){
+		$("#notification-message").text(message);
+		$("#notification-popup").popup();
+		$("#notification-popup").popup("open");
+		setTimeout(function(){$("#notification-popup").popup("close");},750);
 	};
 })(jQuery);
