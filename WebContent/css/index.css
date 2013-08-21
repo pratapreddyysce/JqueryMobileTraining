@@ -94,3 +94,9 @@ opacity:0.1;
 .fieldset span{
 	float: right;
 }
+.listview-header{
+	display:inline-block !important;
+	float:right;
+	margin-top: -4px;
+	margin-right:-7px;
+}

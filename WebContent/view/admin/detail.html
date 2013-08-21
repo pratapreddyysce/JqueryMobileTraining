@@ -1,0 +1,19 @@
+<meta charset="UTF-8">
+<div data-role="page" id="a-prop-detail-page" data-add-back-btn="true">
+	<div data-role="header">
+		<h1 id="prop-detail_headname"></h1>
+		<a href="javascript:void(0)" onclick="logout()" data-role="button" data-icon="alert" class="ui-btn-right" data-iconpos="right" data-theme="e">Log out</a>
+	</div>
+	<div data-role="content">
+		<div data-role="fieldcontain" id="a-prop_image_thumbnail" class="imagebox" align="center"></div>
+		<div data-role="fieldcontain" class="fieldset">
+			<label>ชื่อ : </label> <span id="a-prop_detail_name"></span>
+		</div>
+		<div data-role="fieldcontain" class="fieldset">
+			<label>จำนวนอุปกรณ์ : </label> <input name="a-prop_detail_qty" id="a-prop_detail_qty" size="5" min="0" max="999" data-clear-btn="true" type="number" />
+		</div>
+		<div align="center">
+			<a href="" id="a-confirm-edit" data-role="button" data-icon="gear" data-inline="true">ยืนยันการแก้ไขจำนวนอุปกรณ์</a>
+		</div>
+	</div>
+</div>
